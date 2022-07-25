@@ -2,7 +2,7 @@ olympus:
   ares:
     initiative-defense: true
     passive-defense: true
-    passiveDefenseConfig:
+    passive-defense-config:
       xss-defense: false
       over-times-fusing: false
       over-times-fusing-interceptor-config:
