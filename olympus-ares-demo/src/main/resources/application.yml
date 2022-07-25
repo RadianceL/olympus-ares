@@ -1,0 +1,11 @@
+olympus:
+  ares:
+    initiative-defense: true
+    passive-defense: true
+    passiveDefenseConfig:
+      xss-defense: false
+      over-times-fusing: false
+      over-times-fusing-interceptor-config:
+        threshold: 3
+        time-millis-per-slice: 1000
+        window-size: 10

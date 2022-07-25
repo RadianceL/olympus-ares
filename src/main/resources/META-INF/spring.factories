@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.olympus.configuration.AresDefenseAutoConfiguration,\
-  com.olympus.configuration.AresDefenseSpringConfiguration
+  com.olympus.configuration.AresDefenseConfiguration

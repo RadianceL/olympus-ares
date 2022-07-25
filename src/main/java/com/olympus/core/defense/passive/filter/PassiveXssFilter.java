@@ -1,4 +1,4 @@
-package com.olympus.core.defense.filter;
+package com.olympus.core.defense.passive.filter;
 
 import com.olympus.core.XssHttpRequestWrapper;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  * @author eddie
  */
-public class InitiativeXssFilter implements Filter {
+public class PassiveXssFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {

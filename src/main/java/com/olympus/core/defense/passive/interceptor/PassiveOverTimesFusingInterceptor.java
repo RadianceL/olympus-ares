@@ -1,7 +1,6 @@
-package com.olympus.core.defense.interceptor;
+package com.olympus.core.defense.passive.interceptor;
 
 import cn.hutool.core.date.DateUtil;
-import com.olympus.exception.OverTimesFusingException;
 import com.olympus.utils.sliding.TimeWindowSliding;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class InitiativeOverTimesFusingInterceptor implements HandlerInterceptor {
+public class PassiveOverTimesFusingInterceptor implements HandlerInterceptor {
 
     /**
      * 滑动时间窗

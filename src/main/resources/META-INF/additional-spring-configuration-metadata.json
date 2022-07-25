@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "olympus",
+      "description": "自动装配database数据源.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "olympus.ares.initiative-defense",
+      "defaultValue": "false",
+      "type": "java.lang.Boolean",
+      "description": "主动防御是否开启.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration"
+    }, {
+      "name": "olympus.ares.passive-defense",
+      "defaultValue": "false",
+      "type": "java.lang.Boolean",
+      "description": "被动防御是否开启.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration"
+    },{
+      "name": "olympus.ares.passive-defense-config.xss-defense",
+      "defaultValue": "false",
+      "type": "java.lang.Boolean",
+      "description": "xss防御是否开启.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration$PassiveDefenseConfig"
+    },{
+      "name": "olympus.ares.passive-defense-config.over-times-fusing",
+      "defaultValue": "false",
+      "type": "java.lang.Boolean",
+      "description": "是否开启过载保护.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration$PassiveDefenseConfig"
+    },{
+      "name": "olympus.ares.passiveDefenseConfig.over-times-fusing-interceptor-config.window-size",
+      "defaultValue": "false",
+      "type": "java.lang.Integer",
+      "description": "窗口数量 （require >= 5）.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration$OverTimesFusingInterceptorConfig"
+    },{
+      "name": "olympus.ares.passiveDefenseConfig.over-times-fusing-interceptor-config.time-millis-per-slice",
+      "defaultValue": "false",
+      "type": "java.lang.Integer",
+      "description": "每个时间片的时长，以毫秒为单位.",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration$OverTimesFusingInterceptorConfig"
+    },{
+      "name": "olympus.ares.passiveDefenseConfig.over-times-fusing-interceptor-config.threshold",
+      "defaultValue": "false",
+      "type": "java.lang.Integer",
+      "description": "在一个完整窗口期内允许通过的最大阈值(模糊).",
+      "sourceType": "com.olympus.configuration.AresDefenseConfiguration$OverTimesFusingInterceptorConfig"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 package com.olympus.configuration;
 
-import com.olympus.core.defense.filter.InitiativeXssFilter;
+import com.olympus.core.defense.passive.filter.PassiveXssFilter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
@@ -12,28 +14,34 @@ import org.springframework.context.annotation.Bean;
  *
  * @author eddie
  */
+@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AresDefenseAutoConfiguration {
     /**
      * 滑动时间窗
      */
-    private final AresDefenseSpringConfiguration aresDefenseSpringConfiguration;
+    private final AresDefenseConfiguration aresDefenseSpringConfiguration;
 
     @Bean
-    public FilterRegistrationBean<InitiativeXssFilter> registrationInitiativeXssFilter(){
+    @ConditionalOnProperty(prefix = "olympus.ares.passive-defense-config", name = "xss-defense", havingValue = "true")
+    public FilterRegistrationBean<PassiveXssFilter> registrationInitiativeXssFilter(){
+        log.info("olympus-ares: initialize PassiveXssFilter...");
         //通过FilterRegistrationBean实例设置优先级可以生效
-        FilterRegistrationBean<InitiativeXssFilter> bean = new FilterRegistrationBean<>();
+        FilterRegistrationBean<PassiveXssFilter> bean = new FilterRegistrationBean<>();
         //注册自定义过滤器
-        bean.setFilter(new InitiativeXssFilter());
+        bean.setFilter(new PassiveXssFilter());
         //过滤器名称
         bean.setName("xssDefense");
         //过滤所有路径
         bean.addUrlPatterns("/*");
+        log.info("olympus-ares: initialize PassiveXssFilter success");
         return bean;
     }
 
     @Bean
+    @ConditionalOnProperty(prefix = "olympus.ares.passive-defense-config", name = "over-times-fusing", havingValue = "true")
     public AresDefenseWebConfigure registrationAresDefenseWebConfigure(){
+        log.info("olympus-ares: initialize PassiveOverTimesFusingInterceptor...");
         return new AresDefenseWebConfigure(aresDefenseSpringConfiguration);
     }
 }
