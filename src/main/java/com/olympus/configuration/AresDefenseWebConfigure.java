@@ -1,6 +1,7 @@
 package com.olympus.configuration;
 
 import com.olympus.core.defense.passive.interceptor.PassiveOverTimesFusingInterceptor;
+import com.olympus.core.defense.support.PassiveOverTimesFusingRole;
 import com.olympus.utils.sliding.TimeWindowSliding;
 import com.olympus.utils.sliding.data.TimeWindowSlidingDataSource;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,10 @@ public class AresDefenseWebConfigure implements WebMvcConfigurer {
      * 滑动时间窗
      */
     private final AresDefenseConfiguration aresDefenseConfiguration;
+    /**
+     * 超过访问次数规则
+     */
+    private final PassiveOverTimesFusingRole passiveOverTimesFusingRole;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -39,9 +44,9 @@ public class AresDefenseWebConfigure implements WebMvcConfigurer {
 
         TimeWindowSliding timeWindowSliding = new TimeWindowSliding(TimeWindowSlidingDataSource.defaultDataSource(),
                 overTimesFusingInterceptorConfig.getWindowSize(), overTimesFusingInterceptorConfig.getTimeMillisPerSlice(),
-                overTimesFusingInterceptorConfig.getTimeMillisPerSlice());
+                overTimesFusingInterceptorConfig.getThreshold());
 
-        PassiveOverTimesFusingInterceptor interceptor = new PassiveOverTimesFusingInterceptor(timeWindowSliding);
+        PassiveOverTimesFusingInterceptor interceptor = new PassiveOverTimesFusingInterceptor(timeWindowSliding, passiveOverTimesFusingRole);
         registry.addInterceptor(interceptor).addPathPatterns("/**");
         log.info("olympus-ares: initialize PassiveOverTimesFusingInterceptor success");
     }

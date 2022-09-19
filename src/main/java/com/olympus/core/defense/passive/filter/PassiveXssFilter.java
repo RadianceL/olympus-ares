@@ -21,7 +21,7 @@ public class PassiveXssFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
         XssHttpRequestWrapper requestWrapper = new XssHttpRequestWrapper(request);
         filterChain.doFilter(requestWrapper, servletResponse);
     }

@@ -1,6 +1,7 @@
 package com.olympus.configuration;
 
 import com.olympus.core.defense.passive.filter.PassiveXssFilter;
+import com.olympus.core.defense.support.PassiveOverTimesFusingRole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class AresDefenseAutoConfiguration {
      * 滑动时间窗
      */
     private final AresDefenseConfiguration aresDefenseSpringConfiguration;
+    /**
+     * 超过访问次数规则
+     */
+    private final PassiveOverTimesFusingRole passiveOverTimesFusingRole;
 
     @Bean
     @ConditionalOnProperty(prefix = "olympus.ares.passive-defense-config", name = "xss-defense", havingValue = "true")
@@ -42,6 +47,6 @@ public class AresDefenseAutoConfiguration {
     @ConditionalOnProperty(prefix = "olympus.ares.passive-defense-config", name = "over-times-fusing", havingValue = "true")
     public AresDefenseWebConfigure registrationAresDefenseWebConfigure(){
         log.info("olympus-ares: initialize PassiveOverTimesFusingInterceptor...");
-        return new AresDefenseWebConfigure(aresDefenseSpringConfiguration);
+        return new AresDefenseWebConfigure(aresDefenseSpringConfiguration, passiveOverTimesFusingRole);
     }
 }

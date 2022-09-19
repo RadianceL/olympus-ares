@@ -3,9 +3,9 @@ olympus:
     initiative-defense: true
     passive-defense: true
     passive-defense-config:
-      xss-defense: false
-      over-times-fusing: false
+      xss-defense: true
+      over-times-fusing: true
       over-times-fusing-interceptor-config:
-        threshold: 3
+        threshold: 10
         time-millis-per-slice: 1000
-        window-size: 10
+        window-size: 15

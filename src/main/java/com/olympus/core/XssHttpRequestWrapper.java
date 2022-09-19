@@ -29,7 +29,7 @@ public class XssHttpRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getParameter(String name) {
         String value = super.getParameter(name);
-        if(!StringUtils.isEmpty(value)){
+        if (!StringUtils.isEmpty(value)) {
             value = HtmlUtil.filter(value);
         }
         return value;
@@ -38,13 +38,13 @@ public class XssHttpRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String[] getParameterValues(String name) {
         String[] values = super.getParameterValues(name);
-        if(values!=null){
-            for(int i=0;i<values.length;i++){
+        if (values != null) {
+            for (int i = 0; i < values.length; i++) {
                 String value = values[i];
-                if(!StringUtils.isEmpty(value)){
+                if (!StringUtils.isEmpty(value)) {
                     value = HtmlUtil.filter(value);
                 }
-                values[i]=value;
+                values[i] = value;
             }
         }
         return values;
@@ -54,17 +54,17 @@ public class XssHttpRequestWrapper extends HttpServletRequestWrapper {
     public Map<String, String[]> getParameterMap() {
         Map<String, String[]> parameters = super.getParameterMap();
         Map<String, String[]> map = new LinkedHashMap<>();
-        if(parameters !=null){
-            for(String key : parameters.keySet()){
+        if (parameters != null) {
+            for (String key : parameters.keySet()) {
                 String[] values = parameters.get(key);
-                for(int i=0;i<values.length;i++){
+                for (int i = 0; i < values.length; i++) {
                     String value = values[i];
-                    if(!StringUtils.isEmpty(value)){
+                    if (!StringUtils.isEmpty(value)) {
                         value = HtmlUtil.filter(value);
                     }
-                    values[i]=value;
+                    values[i] = value;
                 }
-                map.put(key,values);
+                map.put(key, values);
             }
         }
         return map;
@@ -73,7 +73,7 @@ public class XssHttpRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getHeader(String name) {
         String value = super.getHeader(name);
-        if(!StringUtils.isEmpty(value)){
+        if (!StringUtils.isEmpty(value)) {
             value = HtmlUtil.filter(value);
         }
         return value;
@@ -86,23 +86,23 @@ public class XssHttpRequestWrapper extends HttpServletRequestWrapper {
         BufferedReader buffer = new BufferedReader(reader);
         StringBuilder body = new StringBuilder();
         String line = buffer.readLine();
-        while (line !=null){
+        while (line != null) {
             body.append(line);
             line = buffer.readLine();
         }
         buffer.close();
         reader.close();
         in.close();
-        Map<String,Object> map = JSONObject.parseObject(body.toString(), new TypeReference<Map<String, Object>>(){});
-        Map<String,Object> result = new LinkedHashMap<>();
-        for(String key : map.keySet()){
+        Map<String, Object> map = JSONObject.parseObject(body.toString(), new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> result = new LinkedHashMap<>();
+        for (String key : map.keySet()) {
             Object val = map.get(key);
-            if(val instanceof String){
-                if(!StringUtils.isEmpty(val.toString())){
-                    result.put(key,HtmlUtil.filter(val.toString()));
+            if (val instanceof String) {
+                if (!StringUtils.isEmpty(val.toString())) {
+                    result.put(key, HtmlUtil.filter(val.toString()));
                 }
-            }else {
-                result.put(key,val);
+            } else {
+                result.put(key, val);
             }
         }
 
