@@ -18,4 +18,9 @@ public class PassiveOverTimesFusingRoleImpl implements PassiveOverTimesFusingRol
     public String defineRequestRecordKey(HttpServletRequest request, HttpServletResponse response) {
         return request.getRequestURI();
     }
+
+    @Override
+    public void onHandlerRejectResponse(HttpServletRequest request, HttpServletResponse response) {
+
+    }
 }

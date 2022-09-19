@@ -19,4 +19,11 @@ public interface PassiveOverTimesFusingRole {
      */
     String defineRequestRecordKey(HttpServletRequest request, HttpServletResponse response);
 
+    /**
+     * 处理拒绝请求
+     * @param request           请求
+     * @param response          返回
+     */
+    void onHandlerRejectResponse(HttpServletRequest request, HttpServletResponse response);
+
 }
