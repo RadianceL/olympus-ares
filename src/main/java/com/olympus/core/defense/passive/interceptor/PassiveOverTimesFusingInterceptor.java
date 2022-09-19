@@ -42,7 +42,7 @@ public class PassiveOverTimesFusingInterceptor implements HandlerInterceptor {
         int vagueRequestTime = timeWindowSliding.allowNotLimitTotal(requestKey);
         log.info("InitiativeOverTimesFusingInterceptor report：this URI [{}]，time:[{}], require [{}] times in current window",
                 requestKey, DateUtil.now(), vagueRequestTime);
-
+        passiveOverTimesFusingRole.onHandlerRejectResponse(request, response);
         return false;
     }
 
